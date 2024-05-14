@@ -24,6 +24,14 @@ internal class Program
         miPava.CambiarModo(ModoEnum.Maximo);
         miPava.CalentarAgua();
         Console.WriteLine($"La pava está en modo {miPava.Modo}");
+        Thread.Sleep(2000);
+        miPava.PresionarBotonEncendido();
+        miPava.CambiarModo(ModoEnum.Minimo);
+        miPava.CalentarAgua();
+        Console.WriteLine($"La pava está en modo {miPava.Modo}");
+
+
+
     }
 
     private static void PruebaDeObjetoPersona()

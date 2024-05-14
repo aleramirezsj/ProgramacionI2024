@@ -36,6 +36,7 @@ namespace EjerciciosDePrueba.Clases
         public void PresionarBotonEncendido()
         {
             this.Encendido = !this.Encendido;
+            this.Temperatura_del_agua = 0;
         }
 
         public void CambiarModo(ModoEnum modo)
@@ -55,6 +56,10 @@ namespace EjerciciosDePrueba.Clases
                     while (Temperatura_del_agua < 85)
                     {
                         Temperatura_del_agua++;
+                        Console.Clear();
+                        Console.WriteLine($"Pava calentando... temperatura:{Temperatura_del_agua}");
+                        Thread.Sleep(100);
+                        
                     }
                     if (Temperatura_del_agua == 85)
                         PresionarBotonEncendido();
@@ -64,6 +69,10 @@ namespace EjerciciosDePrueba.Clases
                     while (Temperatura_del_agua < 105)
                     {
                         Temperatura_del_agua++;
+                        Console.Clear();
+                        Console.WriteLine($"Pava calentando... temperatura:{Temperatura_del_agua}");
+                        Thread.Sleep(100);
+                        
                     }
                     if (Temperatura_del_agua == 105)
                         PresionarBotonEncendido();
