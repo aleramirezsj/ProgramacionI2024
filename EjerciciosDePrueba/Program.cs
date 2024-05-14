@@ -1,11 +1,83 @@
 ﻿
+
+
+using EjerciciosDePrueba.Clases;
+using EjerciciosDePrueba.Enums;
+
 internal class Program
 {
     private static void Main(string[] args)
     {
         //PedirNombreYSaludar();
         //CalcularDiasDeVida();
-        ImprimirMinimoDe4();
+        //ImprimirMinimoDe4();
+        //CalcularValorPago();
+        //PruebaDeObjetoSplit();
+        //PruebaDeObjetoPersona();
+        PruebaPavaElectrica();
+    }
+
+    private static void PruebaPavaElectrica()
+    {
+        PavaElectrica miPava= new PavaElectrica("Liliana", "Plateado", "Acero inoxidable");
+        miPava.PresionarBotonEncendido();
+        miPava.CambiarModo(ModoEnum.Maximo);
+        miPava.CalentarAgua();
+        Console.WriteLine($"La pava está en modo {miPava.Modo}");
+    }
+
+    private static void PruebaDeObjetoPersona()
+    {
+        Persona albert = new Persona("Albert Einstein", "9 de Julio 1111", 1879);
+        Persona robert = new Persona("Robert Oppenheider", "Manhattan 2222", 1904);
+        robert.Decir("Albert, sabés como se despiden los químicos?");
+        albert.Decir("No, ni idea");
+        albert.Apellido = "Pianetti";
+        albert.Dni = 1111111;
+        robert.Decir("Acido un placer");
+    }
+
+    private static void PruebaDeObjetoSplit()
+    {
+        //instanciamos el objeto split
+        Split miSplit =new Split("Blanco", 3000, "Marshall");
+        miSplit.SubirTemperatura();
+        miSplit.SubirTemperatura();
+        miSplit.PresionarBotonEncendido();
+        miSplit.CambiarModo("Deshumidificación");
+        miSplit.SubirTemperatura();
+        Console.WriteLine("El modo definido del split es:" + miSplit.modo);
+    }
+
+    private static void CalcularValorPago()
+    {
+        //declaramos las variables
+        double valorCuota;
+        int nroDia;
+
+        //Leemos las variable
+        Console.Write("Ingrese valor de la cuota:");
+        valorCuota=double.Parse(Console.ReadLine());
+
+        Console.Write("Ingrese el número del día de pago:");
+        nroDia= int.Parse(Console.ReadLine());
+
+        switch (nroDia)
+        {
+            case < 3:
+                valorCuota = valorCuota - (valorCuota * 0.03);
+                break;
+            case >= 6 and <= 10:
+                valorCuota = valorCuota + (valorCuota * 0.1);
+                break;
+            case >= 11 and <= 20:
+                valorCuota = valorCuota + (valorCuota * 0.12);
+                break;
+            case >=21 and <= 31:
+                valorCuota += (valorCuota * 0.15);
+                break;
+        }
+        Console.WriteLine($"El valor de la cuota para el día de pago es:{valorCuota}");
     }
 
     /// <summary>
@@ -28,6 +100,16 @@ internal class Program
 
         Console.Write("Ingrese el cuarto número:");
         num4 = int.Parse(Console.ReadLine());
+
+        //comparamos los números
+        if (num1 < num2 && num1 < num3 && num1 < num4)
+            Console.WriteLine("El número menor es primero: " + num1);
+        if (num2 < num1 && num2 < num3 && num2 < num4)
+            Console.WriteLine("El número menor es el segundo: " + num2);
+        if (num3 < num1 && num3 < num2 && num3 < num4)
+            Console.WriteLine("El número menor es el tercero: " + num3);
+        if (num4 < num1 && num4 < num3 && num4 < num2)
+            Console.WriteLine("El número menor es el cuerto: " + num4);
     }
 
     //Creamos un método que pida el nombre y apellido del usuario
