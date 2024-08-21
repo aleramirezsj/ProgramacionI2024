@@ -4,7 +4,7 @@
 using EjerciciosDePrueba.Clases;
 using EjerciciosDePrueba.Enums;
 
-internal class Program
+public class ProgramEjercicios
 {
     private static void Main(string[] args)
     {
@@ -14,12 +14,48 @@ internal class Program
         //CalcularValorPago();
         //PruebaDeObjetoSplit();
         //PruebaDeObjetoPersona();
-        PruebaPavaElectrica();
+        //PruebaPavaElectrica();
+        //PruebaDeClasesAbstractasYHerencia();
+        //PruebaCalculadoraPasajePorReferencia();
+        //fechasValidasInvalidas();
+        //Console.WriteLine(ControlFechasValida(31, 4, 2023));
+        //Console.WriteLine(CalcularDiasDeVida(10, 10, 1));
+        PruebaDeClasesGenéricas();
+    }
+
+    private static void PruebaDeClasesGenéricas()
+    {
+        Empresa<Empleado> empresa = new Empresa<Empleado>("Neumáticos Debona");
+        Gerente empleado1 = new Gerente("Juan", "Perez");
+        Gerente empleado2 = new Gerente("Pedro", "Gomez");
+        empresa.agregarEmpleado(empleado1);
+        empresa.agregarEmpleado(empleado2);
+        Console.WriteLine(empresa.listarPersonas());
+        empresa.quitarEmpleado(empleado2);
+        Console.WriteLine(empresa.listarPersonas());
+
+
+    }
+
+    private static void PruebaCalculadoraPasajePorReferencia()
+    {
+        int a = 123;
+        int b = 10;
+        int total = 0;
+        Calculadora calculadora = new Calculadora();
+        calculadora.Sumar(a, b, ref total);
+        Console.WriteLine("La suma total es:" + total);
+    }
+
+    private static void PruebaDeClasesAbstractasYHerencia()
+    {
+        Gerente juan = new Gerente("Juan Javier", "Fernandez");
+        Console.WriteLine(juan.ImprimirDatos());
     }
 
     private static void PruebaPavaElectrica()
     {
-        PavaElectrica miPava= new PavaElectrica("Liliana", "Plateado", "Acero inoxidable");
+        PavaElectrica miPava = new PavaElectrica("Liliana", "Plateado", "Acero inoxidable");
         miPava.PresionarBotonEncendido();
         miPava.CambiarModo(ModoEnum.Maximo);
         miPava.CalentarAgua();
@@ -48,7 +84,7 @@ internal class Program
     private static void PruebaDeObjetoSplit()
     {
         //instanciamos el objeto split
-        Split miSplit =new Split("Blanco", 3000, "Marshall");
+        Split miSplit = new Split("Blanco", 3000, "Marshall");
         miSplit.SubirTemperatura();
         miSplit.SubirTemperatura();
         miSplit.PresionarBotonEncendido();
@@ -65,10 +101,10 @@ internal class Program
 
         //Leemos las variable
         Console.Write("Ingrese valor de la cuota:");
-        valorCuota=double.Parse(Console.ReadLine());
+        valorCuota = double.Parse(Console.ReadLine());
 
         Console.Write("Ingrese el número del día de pago:");
-        nroDia= int.Parse(Console.ReadLine());
+        nroDia = int.Parse(Console.ReadLine());
 
         switch (nroDia)
         {
@@ -81,7 +117,7 @@ internal class Program
             case >= 11 and <= 20:
                 valorCuota = valorCuota + (valorCuota * 0.12);
                 break;
-            case >=21 and <= 31:
+            case >= 21 and <= 31:
                 valorCuota += (valorCuota * 0.15);
                 break;
         }
@@ -98,8 +134,8 @@ internal class Program
 
         //pedimos el ingreso de los 4 números
         Console.Write("Ingrese el primer número:");
-        num1= int.Parse(Console.ReadLine());
-        
+        num1 = int.Parse(Console.ReadLine());
+
         Console.Write("Ingrese el segundo número:");
         num2 = int.Parse(Console.ReadLine());
 
@@ -125,7 +161,7 @@ internal class Program
     private static void PedirNombreYSaludar()
     {
         //Declaramos las variables
-        string nombre,apellido;
+        string nombre, apellido;
 
         Console.Write("Ingrese su nombre:");
         nombre = Console.ReadLine();
@@ -143,10 +179,10 @@ internal class Program
     private static void CalcularDiasDeVida()
     {
         //declaramos las variables
-        int años,meses,dias,diasDeVida;
+        int años, meses, dias, diasDeVida;
 
         Console.Write("Ingrese sus años de vida:");
-        años=int.Parse(Console.ReadLine());
+        años = int.Parse(Console.ReadLine());
 
         Console.Write("Ingrese sus meses de vida:");
         meses = int.Parse(Console.ReadLine());
@@ -157,6 +193,109 @@ internal class Program
         diasDeVida = (años * 365) + (meses * 30) + dias;
 
         Console.WriteLine($"Los días de vida totales son:{diasDeVida}");
+    }
+    public static int CalcularDiasDeVida(int años, int meses, int dias)
+    {
+        //declaramos las variables
+        int diasDeVida;
+
+        diasDeVida = (años * 365) + (meses * 30) + dias;
+
+        return diasDeVida;
+    }
+    private static void fechasValidasInvalidas()
+
+    {
+        //definir variables  
+        int dia, mes, año;
+
+        // Pedir Informacion al usuario
+        Console.WriteLine("Ingrese el día");
+        dia = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Ingrese el mes");
+        mes = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Ingrese el año");
+        año = int.Parse(Console.ReadLine());
+
+
+        if ((dia >= 1 && dia <= 31) && (mes == 1 || mes == 3 ||
+                mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12))
+            Console.WriteLine("Fecha Valida");
+
+        else if ((dia >= 1 && dia <= 30) && (mes == 4 || mes == 6 || mes == 9 || mes == 11))
+            Console.WriteLine("Fecha Valida ");
+
+        else if ((dia == 29) && (mes == 2) && (año % 4 == 0) || (dia >= 1 && dia <= 28) && (mes == 2))
+
+            Console.WriteLine("Fecha Valida ");
+
+        else
+            Console.WriteLine("Fecha Invalida");
+
+    }
+    public static bool ControlFechasValida(int dia, int mes, int año)
+
+    {
+        if ((dia >= 1 && dia <= 31) && (mes == 1 || mes == 3 ||
+                mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12))
+            return true;
+
+        else if ((dia >= 1 && dia <= 30) && (mes == 4 || mes == 6 || mes == 9 || mes == 11))
+            return true;
+
+        else if ((dia == 29) && (mes == 2) && (año % 4 == 0) || (dia >= 1 && dia <= 28) && (mes == 2))
+
+            return true;
+
+        else
+            return false;
+
+    }
+
+    private static void Triangulos()
+    {
+        // Declaramos las variables 
+        int lado1, lado2, lado3;
+
+        Console.Write("Ingrese el 1er Lado del triángulo: ");
+        lado1 = int.Parse(Console.ReadLine());
+
+        Console.Write("Ingrese el 2do Lado del triángulo: ");
+        lado2 = int.Parse(Console.ReadLine());
+
+        Console.Write("Ingrese el 3er Lado del triángulo: ");
+        lado3 = int.Parse(Console.ReadLine());
+
+        if (lado1 == lado2 && lado2 == lado3)
+        {
+            Console.WriteLine("El triángulo es equilátero.");
+        }
+        else if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3)
+        {
+            Console.WriteLine("El triángulo es isósceles.");
+        }
+        else
+        {
+            Console.WriteLine("El triángulo es escaleno.");
+        }
+    }
+    public static string Triangulos(int lado1, int lado2, int lado3)
+    {
+        if (lado1 == lado2 && lado2 == lado3)
+        {
+            return "equilatero";
+        }
+        else if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3)
+        {
+            return "isoceles";
+        }
+        else
+        {
+            return "escaleno";
+        }
+
     }
 
 }
